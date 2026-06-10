@@ -14,4 +14,18 @@ The LSP server is written in Go and provides:
 - Glob pattern validation and collision detection
 - Hover documentation with slice metadata
 
-This file should be updated once the extension structure is established — add build/test/lint commands, architecture overview, and project-specific conventions here.
+## Commands
+
+```bash
+npm install          # install dependencies
+npm run compile      # compile TypeScript → out/
+npm run watch        # compile in watch mode
+npm run lint         # run ESLint
+npm run package      # bundle into a .vsix
+```
+
+## Architecture
+
+The extension is a thin LSP client (`src/extension.ts`). On `activate`, it reads the configured binary path (`chiselReleasesLsp.serverPath`, defaulting to `chisel-releases-lsp` on PATH), launches the process over stdio, and wires it up to VS Code via `vscode-languageclient`. It registers for all `*.yaml` files and watches them for changes so the server can reindex on saves. On `deactivate` the client is stopped.
+
+All language intelligence lives in the external `chisel-releases-lsp` Go binary — the extension itself contains no analysis logic.

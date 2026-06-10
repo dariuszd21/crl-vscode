@@ -1,0 +1,56 @@
+{
+  "name": "crl-vscode",
+  "displayName": "Chisel Releases LSP",
+  "description": "VS Code extension for chisel-releases YAML files via chisel-releases-lsp",
+  "version": "0.0.1",
+  "publisher": "dariuszd21",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dariuszd21/crl-vscode"
+  },
+  "engines": {
+    "vscode": "^1.85.0",
+    "node": ">=22.0.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "activationEvents": [
+    "workspaceContains:chisel.yaml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Chisel Releases LSP",
+      "properties": {
+        "chiselReleasesLsp.serverPath": {
+          "type": "string",
+          "default": "chisel-releases-lsp",
+          "markdownDescription": "Path to the `chisel-releases-lsp` binary. Defaults to searching `PATH`."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc --watch -p ./",
+    "lint": "eslint src",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vscode/vsce": "^3.0.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.0"
+  }
+}
