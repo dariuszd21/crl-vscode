@@ -30,6 +30,12 @@
           "type": "string",
           "default": "chisel-releases-lsp",
           "markdownDescription": "Path to the `chisel-releases-lsp` binary. Defaults to searching `PATH`."
+        },
+        "chiselReleasesLsp.minPrefixLength": {
+          "type": "integer",
+          "default": 2,
+          "minimum": 2,
+          "markdownDescription": "Minimum number of characters that must be typed in an `essential:` reference before completion suggestions appear."
         }
       }
     }

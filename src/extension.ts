@@ -8,6 +8,13 @@ import {
 
 let client: LanguageClient;
 
+function getServerConfig(): { minPrefixLength: number } {
+  const config = vscode.workspace.getConfiguration("chiselReleasesLsp");
+  return {
+    minPrefixLength: config.get<number>("minPrefixLength", 2),
+  };
+}
+
 export function activate(context: vscode.ExtensionContext): void {
   const config = vscode.workspace.getConfiguration("chiselReleasesLsp");
   const serverPath = config.get<string>("serverPath", "chisel-releases-lsp");
@@ -21,7 +28,9 @@ export function activate(context: vscode.ExtensionContext): void {
     documentSelector: [{ scheme: "file", language: "yaml" }],
     synchronize: {
       fileEvents: vscode.workspace.createFileSystemWatcher("**/*.yaml"),
+      configurationSection: "chiselReleasesLsp",
     },
+    initializationOptions: getServerConfig(),
   };
 
   client = new LanguageClient(
