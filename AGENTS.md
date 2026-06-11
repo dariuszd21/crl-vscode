@@ -18,10 +18,11 @@ The LSP server is written in Go and provides:
 
 ```bash
 npm install          # install dependencies
-npm run compile      # compile TypeScript → out/
-npm run watch        # compile in watch mode
+npm run compile      # bundle with esbuild → out/extension.js
+npm run watch        # bundle in watch mode
+npm run check-types  # TypeScript type checking (no emit)
 npm run lint         # run ESLint
-npm run package      # bundle into a .vsix
+npm run package      # bundle (production) + package into a .vsix
 ```
 
 ## Architecture

@@ -1,3 +1,4 @@
+import * as os from "os";
 import * as vscode from "vscode";
 import {
   LanguageClient,
@@ -15,9 +16,11 @@ function getServerConfig(): { minPrefixLength: number } {
   };
 }
 
-export function activate(context: vscode.ExtensionContext): void {
+export async function activate(context: vscode.ExtensionContext): Promise<void> {
   const config = vscode.workspace.getConfiguration("chiselReleasesLsp");
-  const serverPath = config.get<string>("serverPath", "chisel-releases-lsp");
+  const serverPath = config
+    .get<string>("serverPath", "chisel-releases-lsp")
+    .replace(/^~/, os.homedir());
 
   const serverOptions: ServerOptions = {
     run: { command: serverPath, transport: TransportKind.stdio },
@@ -40,7 +43,14 @@ export function activate(context: vscode.ExtensionContext): void {
     clientOptions
   );
 
-  client.start();
+  try {
+    await client.start();
+  } catch (err) {
+    vscode.window.showErrorMessage(
+      `Chisel Releases LSP: failed to start server at "${serverPath}". ` +
+        `Install it with: go install github.com/dariuszd21/chisel-releases-lsp/cmd/chisel-releases-lsp@latest\n${err}`
+    );
+  }
 }
 
 export function deactivate(): Thenable<void> | undefined {
