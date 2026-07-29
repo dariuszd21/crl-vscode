@@ -56,7 +56,7 @@ code --install-extension crl-vscode-<version>.vsix
 ## Building from Source
 
 ```bash
-node --version   # must be >= 24
+node --version   # must be >= 22
 npm install
 npm run compile
 npm run package  # produces crl-vscode-<version>.vsix
