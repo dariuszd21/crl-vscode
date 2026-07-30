@@ -43,7 +43,7 @@
   },
   "scripts": {
     "vscode:prepublish": "node esbuild.mjs --production",
-    "compile": "node esbuild.mjs",
+    "build": "node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
