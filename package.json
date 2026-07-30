@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "publisher": "dariuszd21",
   "license": "GPL-3.0",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/dariuszd21/crl-vscode"
@@ -41,9 +42,9 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "node esbuild.js --production",
-    "compile": "node esbuild.js",
-    "watch": "node esbuild.js --watch",
+    "vscode:prepublish": "node esbuild.mjs --production",
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
     "check-types": "tsc --noEmit",
     "lint": "eslint src",
     "package": "vsce package"

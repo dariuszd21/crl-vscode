@@ -16,7 +16,7 @@ function getServerConfig(): { minPrefixLength: number } {
   };
 }
 
-export async function activate(context: vscode.ExtensionContext): Promise<void> {
+export async function activate(_context: vscode.ExtensionContext): Promise<void> {
   const config = vscode.workspace.getConfiguration("chiselReleasesLsp");
   const serverPath = config
     .get<string>("serverPath", "chisel-releases-lsp")
